@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% block title %} {{ current_product }} {% endblock %}
+
+{% block content %}
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for object in objects %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="{{ object.image }}" alt="">
+                        <div class="card-body">
+                            <h2 class="fw-light">{{ object.name }}</h2>
+                            <p class="card-text">
+                                {% if current_product.id == 1 %}
+                                {% for ingredient in object.ingredients.all %} {{ ingredient.name }} {% endfor %}
+                                {% endif %}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Заказать</button>
+                                </div>
+                                <small class="text-muted">{{ object.price }} грн.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
